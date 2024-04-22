@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -31,7 +31,7 @@ namespace WindowsForms
 
         private List<string> InternalDirectorySynchronization(DirectoryInfo firstDirectory, DirectoryInfo secondDirectory)
         {
-            List<string> resultOfInternalDirectorySynchronization = new List<string>();
+            List<string> changesList = new List<string>();
 
             foreach (FileInfo file in firstDirectory.GetFiles())
             {
@@ -40,7 +40,7 @@ namespace WindowsForms
                 if (!fileInFirstDirectory.Exists || fileInFirstDirectory.LastWriteTime < file.LastWriteTime)
                 {
                     File.Copy(file.FullName, fileInFirstDirectory.FullName, true);
-                    resultOfInternalDirectorySynchronization.Add($"Файл {file.Name} изменен");
+                    changesList.Add($"Файл {file.Name} изменен");
                 }
             }
 
@@ -51,10 +51,10 @@ namespace WindowsForms
                 if (!fileInSecondDirectory.Exists)
                 {
                     file.Delete();
-                    resultOfInternalDirectorySynchronization.Add($"Файл {file.Name} удален");
+                    changesList.Add($"Файл {file.Name} удален");
                 }
             }
-            return resultOfInternalDirectorySynchronization;
+            return changesList;
         }
     }
 
