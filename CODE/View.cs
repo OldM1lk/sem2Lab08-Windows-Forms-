@@ -12,8 +12,13 @@ namespace WindowsForms
             Presenter presenter = new Presenter(this);
         }
 
-        string IView.FirstDirectory() { return firstDirectoryTextBox.Text; }
-        string IView.SecondDirectory() { return secondDirectoryTextBox.Text; }
+        string IView.FirstDirectory()
+        {
+            return firstDirectoryTextBox.Text;
+        }
+        string IView.SecondDirectory() {
+            return secondDirectoryTextBox.Text;
+        }
         
         void IView.Synchronize(List<string> messages)
         {
